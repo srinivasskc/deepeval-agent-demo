@@ -1,7 +1,40 @@
+# Environment and secrets
 .env
+.env.*
+!.env.example
+
+# Python virtual environments
 .venv/
 venv/
+env/
+
+# Python build and runtime artifacts
 __pycache__/
-*.pyc
-.deepeval*
+*.py[cod]
+*$py.class
+.Python
+build/
+dist/
+*.egg-info/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# Test and evaluation caches
 .pytest_cache/
+.deepeval/
+.deepeval*
+.cache/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.iml
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

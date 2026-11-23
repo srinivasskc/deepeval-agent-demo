@@ -2,6 +2,7 @@ deepeval
 langchain
 langchain-openai
 langchain-anthropic
+langchain-groq
 langgraph
 langchain-core
 openai

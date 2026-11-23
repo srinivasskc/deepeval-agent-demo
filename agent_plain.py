@@ -1,7 +1,7 @@
 """
 agent_plain.py
 ==============
-A simple customer-support agent built with LangChain + Claude.
+A simple customer-support agent built with LangChain + Groq.
 No evaluation code anywhere. This is what a developer would write
 if they'd never heard of DeepEval.
 
@@ -9,11 +9,21 @@ The agent has two tools:
   - get_order_status(order_id)  -> shipping info
   - get_refund_policy(category) -> refund rules
 
-It uses Claude to decide which tool to call and to compose the answer.
+It uses Groq to decide which tool to call and to compose the answer.
 """
 
+import os
+from importlib import import_module
+
 from dotenv import load_dotenv
-from langchain_anthropic import ChatAnthropic
+
+try:
+    ChatGroq = import_module("langchain_groq").ChatGroq
+except ImportError as exc:
+    raise ImportError(
+        "ChatGroq requires the 'langchain-groq' package. "
+        "Install it with: pip install langchain-groq"
+    ) from exc
 
 load_dotenv()
 from langchain_core.tools import tool
@@ -58,9 +68,13 @@ def get_refund_policy(category: str) -> str:
 
 
 # ---------------------------------------------------------------------------
-# The agent — a LangGraph ReAct agent powered by Claude.
+# The agent — a LangGraph ReAct agent powered by Groq.
 # ---------------------------------------------------------------------------
-llm = ChatAnthropic(model="claude-sonnet-4-6", temperature=0)
+llm = ChatGroq(
+    model="openai/gpt-oss-20b",
+    groq_api_key=os.getenv("GROQ_API_KEY"),
+    temperature=0,
+)
 
 agent = create_agent(
     model=llm,
@@ -83,4 +97,4 @@ def support_agent(user_input: str) -> str:
 
 
 if __name__ == "__main__":
-    print(support_agent("Where is my order ORD-1099?"))
+    print(support_agent("Where is my order ORD-1042?"))
