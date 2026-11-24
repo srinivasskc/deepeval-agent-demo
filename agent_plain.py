@@ -17,13 +17,7 @@ from importlib import import_module
 
 from dotenv import load_dotenv
 
-try:
-    ChatGroq = import_module("langchain_groq").ChatGroq
-except ImportError as exc:
-    raise ImportError(
-        "ChatGroq requires the 'langchain-groq' package. "
-        "Install it with: pip install langchain-groq"
-    ) from exc
+from langchain_groq import ChatGroq
 
 load_dotenv()
 from langchain_core.tools import tool

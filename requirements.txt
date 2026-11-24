@@ -3,6 +3,8 @@ langchain
 langchain-openai
 langchain-anthropic
 langchain-groq
+langchain-mcp-adapters
+mcp
 langgraph
 langchain-core
 openai

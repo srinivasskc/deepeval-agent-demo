@@ -2,7 +2,7 @@
 
 A minimal teaching repo that shows how to evaluate a LangChain agent with
 DeepEval's component-level evaluation: **Task Completion** and **Tool
-Correctness** metrics, applied to a cross-vendor setup (Claude as the
+Correctness** metrics, applied to a cross-vendor setup (Groq as the
 agent, GPT-4o as the judge).
 
 ---
@@ -11,7 +11,7 @@ agent, GPT-4o as the judge).
 
 | File | Who writes it (in real life) | What it does |
 |---|---|---|
-| `agent_plain.py` | Developer (before evals exist) | A normal LangChain + Claude agent. No DeepEval code anywhere. |
+| `agent_plain.py` | Developer (before evals exist) | A normal LangChain + Groq agent. No DeepEval code anywhere. |
 | `agent_instrumented.py` | Developer (after QA asks) | The **same** agent, with **4 lines added** to make it observable to DeepEval. |
 | `test_agent.py` | QA / Tester (you) | Imports the agent, defines goldens, runs metrics. |
 
@@ -41,7 +41,7 @@ they stop being intimidated by component-level evaluation.
 pip install -r requirements.txt
 
 # 2. Set your API keys
-export ANTHROPIC_API_KEY=sk-ant-...
+export GROQ_API_KEY=gsk-...
 export OPENAI_API_KEY=sk-...
 
 # 3. (Optional but recommended) log in to Confident AI to see traces in a UI
@@ -88,8 +88,8 @@ versa). That's the moment that makes component-level evaluation click.
 DeepEval's integration surface evolves. Before your first session, run the
 demo end-to-end once and confirm:
 
-- `ChatAnthropic(model="claude-sonnet-4-5")` — if this errors, swap to the
-  latest Claude model from the Anthropic console.
+- `ChatGroq(model="openai/gpt-oss-20b")` — confirm the model is available
+  for your Groq account if this errors.
 - `from deepeval.integrations.langchain import CallbackHandler` — works as
   written in recent DeepEval versions; older versions may use a different
   import path.
